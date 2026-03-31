@@ -27,7 +27,9 @@ Frontend: HTML5 and CSS3 (utilizing Flexbox for layout).
 Plaintext
 
 project-folder/
+
 │
+
 ├── app.py              # Main Flask application logic and routes
 
 ├── main.py             # Database initialization and setup script
