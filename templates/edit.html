@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Application</h2>
+        <form method="POST">
+            <input name="job_title" value="{{ job[2] }}">
+            <input name="company" value="{{ job[3] }}">
+            <input name="deadline" value="{{ job[4] }}">
+            <input name="status" value="{{ job[5] }}">
+            <button type="submit">Update Job</button>
+        </form>
+    </div>
+</body>

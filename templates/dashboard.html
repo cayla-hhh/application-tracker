@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="nav-container">
+        <a class="btn-logout" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <div class="container">
+        <form method="POST">
+            <input name="job_title" placeholder="Job Title">
+            <input name="company" placeholder="Company">
+            <input name="deadline" placeholder="Deadline">
+            <input name="status" placeholder="Status (e.g. Applied)">
+            <button type="submit">Add Job</button>
+        </form>
+    </div>
+    <div class="container">
+        <h2>{{total_apps}}</h2>
+        <form method="GET" action="{{ url_for('home') }}">
+            <label for="sort">Sort by:</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="company" {% if request.args.get('sort') == 'company' %}selected{% endif %}>Company Name</option>
+                <option value="status" {% if request.args.get('sort') == 'status' %}selected{% endif %}>Status</option>                
+                <option value="deadline" {% if request.args.get('sort') == 'deadline' %}selected{% endif %}>Date</option>
+            </select>
+        </form>
+        <table border="1">
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for app in applications %}
+            <tr>
+                <td>{{app[2]}}</td>
+                <td>{{app[3]}}</td>
+                <td>{{app[4]}}</td>
+                <td>{{app[5]}}</td>
+                <td>
+                    <a class="edit" href="{{ url_for('edit_job', id=app[0]) }}">Edit</a> |
+                    <a class="delete" href="/delete/{{app[0]}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
